@@ -11,7 +11,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="container">
 	<div id="body">
 		<h3>Homepage</h3>
-		<a href="login.html">Request Certificate Signing</a>
+		<a href="certificate_request">Request Certificate Signing</a>
+		<a href="certificate_request/view">View My Certificate Request</a>
 	</div>
 
 

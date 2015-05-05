@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class homepage extends CI_Controller {
 
+
 	public function index()
 	{
 		if($this->session->userdata('logged_in'))
@@ -17,4 +18,5 @@ class homepage extends CI_Controller {
 			redirect('user/login', 'refresh');
 		}
 	}
+
 }

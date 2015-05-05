@@ -38,9 +38,19 @@ class User extends CI_Controller {
 			if ($row['statuscode']==0) {
 				$this->load->view('sukses');
 
-				$sess_array = array(
-						'username' => $userdata['username']
+				if ($userdata['username']=='admin') {
+					$sess_array = array(
+						'username' => $userdata['username'],
+						'loginas' => 'admin'
 					);
+				}
+				else{
+					$sess_array = array(
+							'username' => $userdata['username'],
+							'loginas' => 'member'
+							);
+				}
+
 				$this->session->set_userdata('logged_in', $sess_array);
 
 				redirect('homepage', 'refresh');
