@@ -43,17 +43,19 @@ class User extends CI_Controller {
 						'username' => $userdata['username'],
 						'loginas' => 'admin'
 					);
+					$this->session->set_userdata('logged_in', $sess_array);
+					redirect('admin', 'refresh');
 				}
 				else{
 					$sess_array = array(
 							'username' => $userdata['username'],
 							'loginas' => 'member'
 							);
+					$this->session->set_userdata('logged_in', $sess_array);
+					redirect('homepage', 'refresh');
 				}
 
-				$this->session->set_userdata('logged_in', $sess_array);
 
-				redirect('homepage', 'refresh');
 			}
 			else{
 				echo $row['statusmsg'];

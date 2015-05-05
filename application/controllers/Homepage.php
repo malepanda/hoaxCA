@@ -15,7 +15,7 @@ class homepage extends CI_Controller {
 		else
 		{
 			//Jika tidak ada session di kembalikan ke halaman login
-			redirect('user/login', 'refresh');
+			redirect('welcome', 'refresh');
 		}
 	}
 

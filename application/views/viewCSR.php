@@ -17,6 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="container">
 	<div id="body">
 		<h3>My Certificate Request</h3>
+		<form method="POST" action="accCSR">	
 		<table>
 		  <tr><td>ID</td> <td>Nama Organisasi</td> <td>Unit Organisasi</td> <td>kota</td> <td>Provinsi</td> <td>Waktu Valid (dalam tahun)</td></tr>
 		  
@@ -38,11 +39,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					echo "<td>$kota</td>";
 					echo "<td>$prov</td>";
 					echo "<td>$validTime</td>";
+					echo "<td><button name='acc' type='submit' value='$ID'>Accept</button></td>";
+					echo "<td><button name='dec' type='submit' value='$ID'>Decline</button></td>";
 
 					echo "</tr>";	
 				}	
 			?>
 		</table>
+		</form>
 	</div>
 
 

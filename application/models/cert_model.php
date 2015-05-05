@@ -1,5 +1,5 @@
 <?php
-	class certreq_model extends CI_Model {
+	class cert_model extends CI_Model {
 
 		function __construct()
 		{
@@ -23,8 +23,12 @@
 		public function view(){
 			$session_data = $this->session->userdata('logged_in');
 			$username = $session_data['username'];
-
-			$res = $this->db->query("CALL viewMyRequest('$username')");
+			if ($username=="admin") {
+				$res = $this->db->query("CALL viewAllRequest('$username')");
+			}
+			else
+				$res = $this->db->query("CALL viewMyRequest('$username')");
+			
 			return $res;
 		}
 
