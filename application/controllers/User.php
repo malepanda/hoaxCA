@@ -36,7 +36,6 @@ class User extends CI_Controller {
 					}
 
 			if ($row['statuscode']==0) {
-				$this->load->view('sukses');
 
 				if ($userdata['username']=='admin') {
 					$sess_array = array(

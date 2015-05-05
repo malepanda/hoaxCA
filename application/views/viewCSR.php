@@ -19,26 +19,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<h3>My Certificate Request</h3>
 		<form method="POST" action="accCSR">	
 		<table>
-		  <tr><td>ID</td> <td>Nama Organisasi</td> <td>Unit Organisasi</td> <td>kota</td> <td>Provinsi</td> <td>Waktu Valid (dalam tahun)</td></tr>
+		  <tr><td>ID</td> <td>Domain</td> <td>Nama Organisasi</td> <td>Unit Organisasi</td> <td>kota</td> <td>Provinsi</td> <td>Script</td></tr>
 		  
 		  <?php
 				foreach ($certreq as $row)
 				{
 					$ID = $row['ID'];
+					$domain = $row['domain'];
 					$namaOrganisasi = $row['namaOrganisasi'];
 					$unitOrganisasi = $row['unitOrganisasi'];
 					$kota = $row['kota'];
 					$prov = $row['prov'];
-					$validTime = $row['validTime'];
+					$script = $row['script'];
 
 					echo "<tr>";
 					
 					echo "<td>hoaxCA/req/$ID</td>";
+					echo "<td>$domain</td>";
 					echo "<td>$namaOrganisasi</td>";
 					echo "<td>$unitOrganisasi</td>";
 					echo "<td>$kota</td>";
 					echo "<td>$prov</td>";
-					echo "<td>$validTime</td>";
+					echo "<td><textarea rows='5 cols='100'>$script</textarea></td>";
 					echo "<td><button name='acc' type='submit' value='$ID'>Accept</button></td>";
 					echo "<td><button name='dec' type='submit' value='$ID'>Decline</button></td>";
 

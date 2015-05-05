@@ -9,14 +9,15 @@
 
 		public function request($data = array()){
 			$session_data = $this->session->userdata('logged_in');
+			$domain = $data['domain'];
 			$username = $session_data['username'];
 			$namaOrganisasi = $data['namaOrganisasi'];
 			$unitOrganisasi = $data['unitOrganisasi'];
 			$kota = $data['kota'];
 			$prov = $data['prov'];
-			$validTime = $data['validTime'];
+			$script = $data['script'];
 
-			$res = $this->db->query("CALL RequestCertificate('$username','$namaOrganisasi', '$unitOrganisasi','$kota','$prov','$validTime')");
+			$res = $this->db->query("CALL RequestCertificate('$username', '$domain', '$namaOrganisasi', '$unitOrganisasi','$kota','$prov','$script')");
 			return $res;
 		}
 
