@@ -17,7 +17,7 @@ class Upload extends CI_Controller {
 	function do_upload()
 	{
 		$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'txt';
+		$config['allowed_types'] = 'csr';
 		$config['file_name'] = $this->input->post('ID');
 		// // $config['max_size']	= '100';
 		// $config['max_width']  = '1024';
@@ -38,7 +38,8 @@ class Upload extends CI_Controller {
 		{
 			$data = array('upload_data' => $this->upload->data());
 
-			$this->load->view('sukses', $data);
+			// $this->load->view('sukses');
+			redirect(base_url().'certificate_request/view');
 		}
 	}
 }

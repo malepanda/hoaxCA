@@ -30,7 +30,12 @@ class Certificate_sign extends CI_Controller {
         // Let's assume that this script is set to receive a CSR that has
         // been pasted into a textarea from another page
         //$csrdata = $_POST["CSR"];
-        $csrdata = "file://C:/XAMPP2/htdocs/hoaxCA/anu_com.csr";
+        $ID = $this->input->post('acc');
+        // $csrdata = "file://./uploads/".$ID.".csr";
+        
+        $csrdata = "file://C:/xampp/htdocs/hoaxCA/uploads/".$ID.".csr";
+
+        // echo $csrdata;
         
         // We will sign the request using our own "certificate authority"
         // certificate.  You can use any certificate to sign another, but
@@ -39,8 +44,8 @@ class Certificate_sign extends CI_Controller {
         
         // We need our CA cert and its private key
         
-        $cacert = "file://C:/XAMPP2/htdocs/hoaxCA/assets/ca.crt";
-        $privkey = array("file://C:/XAMPP2/htdocs/hoaxCA/assets/ca.key", "Megaphon3");
+        $cacert = "file://C:/xampp/htdocs/hoaxCA/assets/ca.crt";
+        $privkey = array("file://C:/xampp/htdocs/hoaxCA/assets/ca.key", "Megaphon3");
 
 
        	$usercert = openssl_csr_sign($csrdata, $cacert, $privkey, 365);
@@ -51,7 +56,7 @@ class Certificate_sign extends CI_Controller {
         openssl_x509_export($usercert, $certout);
         echo $certout;
         
-        openssl_x509_export_to_file ( $certout );
+        // openssl_x509_export_to_file ( $certout );
         // Show any errors that occurred here
         while (($e = openssl_error_string()) !== false) {
             echo $e . "\n";
