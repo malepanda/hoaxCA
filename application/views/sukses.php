@@ -47,7 +47,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
       ?>
 
+<<<<<<< HEAD
       <form class="form-signin" action="tologin" method="post">
+=======
+      <form class="form-signin" action="<?php echo base_url();?>/welcome" method="post">
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
         <h2 align="center" class="form-signin-heading">Selamat, Registrasi Anda Berhasil !!! </h2>
         <br /><br />
         <button class="btn btn-primary btn-block" type="submit">Lanjutkan Login</button>

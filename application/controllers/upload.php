@@ -6,6 +6,10 @@ class Upload extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->helper(array('form', 'url'));
+<<<<<<< HEAD
+=======
+		$this->load->model('cert_model');
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
 	}
 
 	function index()
@@ -16,11 +20,23 @@ class Upload extends CI_Controller {
 	function do_upload()
 	{
 		$config['upload_path'] = './uploads/';
+<<<<<<< HEAD
 		$config['allowed_types'] = 'txt';
 		// // $config['max_size']	= '100';
 		// $config['max_width']  = '1024';
 		// $config['max_height']  = '768';
 
+=======
+		$config['allowed_types'] = 'csr';
+		$config['file_name'] = $this->input->post('ID');
+		// // $config['max_size']	= '100';
+		// $config['max_width']  = '1024';
+		// $config['max_height']  = '768';
+		// echo $this->input->post('ID');
+		$data['filepath'] = $config['upload_path'].$config['file_name'];
+		$data['ID'] = $config['file_name'];
+		$this->cert_model->uploadCSR($data);
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
 		$this->load->library('upload', $config);
 
 		if ( ! $this->upload->do_upload())
@@ -33,7 +49,12 @@ class Upload extends CI_Controller {
 		{
 			$data = array('upload_data' => $this->upload->data());
 
+<<<<<<< HEAD
 			$this->load->view('sukses', $data);
+=======
+			// $this->load->view('sukses');
+			redirect(base_url().'certificate_request/view');
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
 		}
 	}
 }

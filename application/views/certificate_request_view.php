@@ -70,7 +70,11 @@
                 <div class="row">
                    
                     		<div class="col-lg-12">
+<<<<<<< HEAD
 
+=======
+                    		<?php echo form_open_multipart('upload/do_upload');?>
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
@@ -88,6 +92,10 @@
                                         <th>Kota</th>
                                         <th>Provinsi</th>
                                         <th>Script</th>
+<<<<<<< HEAD
+=======
+                                        <th>Upload file CSR</th>
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
 
                                     </tr>
                                 </thead>
@@ -109,6 +117,10 @@
             $kota = $row['kota'];
             $prov = $row['prov'];
             $script = $row['script'];
+<<<<<<< HEAD
+=======
+            $uploadable = $row['availableforsigning'];
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
 
             echo "<tr>";
             
@@ -118,7 +130,17 @@
             echo "<td>$unitOrganisasi</td>";
             echo "<td>$kota</td>";
             echo "<td>$prov</td>";
+<<<<<<< HEAD
             echo "<td><textarea rows='5 cols='100'> <?php echo $script;?> </textarea></td>";
+=======
+            echo "<td><textarea rows='5 cols='100'>$script</textarea></td>";
+            if ($uploadable==false) {
+            	echo "<input type='hidden' name='ID' value='$ID'>";
+            	echo '<td><input type="file" name="userfile"/><br><input type="submit" value="upload" /></td>';
+            }
+            else
+            	echo '<td><button class="btn btn-lg btn-success" disabled>UPLOADED</button></td>';
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
 
             echo "</tr>";
           }

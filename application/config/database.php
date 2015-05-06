@@ -64,10 +64,17 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
+<<<<<<< HEAD
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
 	'database' => 'ShoaxCA',
+=======
+	'hostname' => '10.151.40.173',
+	'username' => 'hoaxCA',
+	'password' => '',
+	'database' => 'hoaxCA',
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

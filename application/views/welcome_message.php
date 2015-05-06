@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+<<<<<<< HEAD
     <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+=======
+    <link rel="icon" href="<?php base_url();?>assets/icon/ikon.ico">
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
 
     <title>hoaxCA</title>
 

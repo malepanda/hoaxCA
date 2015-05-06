@@ -52,8 +52,11 @@ class admin extends CI_Controller {
 			$ID = $this->input->post('dec');
 		echo $ID;
 	}
+<<<<<<< HEAD
 	public function kehome(){
 		$this->load->view('homeadmin');
 	}
+=======
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
 
 }

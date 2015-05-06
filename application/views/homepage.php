@@ -59,13 +59,23 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
+<<<<<<< HEAD
                             Selamat Datang
+=======
+                            Buat CSR
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="#">Home</a>
                             </li>
+<<<<<<< HEAD
                             
+=======
+                            <li class="active">
+                                <i class="fa fa-edit"></i> Buat CSR
+                            </li>
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
                         </ol>
                     </div>
                 </div>
@@ -75,10 +85,49 @@
                     <div class="col-lg-6 col-lg-offset-3">
 
 
+<<<<<<< HEAD
                         <h2>Selamat Datang <?php 
                         $session_data = $this->session->userdata('logged_in');
                         $username = $session_data['username']; 
                         echo "$username"; ?> :)</h2>
+=======
+                        <form name="form" role="form" enctype= "multipart/form-data" method="post" action="certificate_request/request.html" onsubmit="return validateForm()">
+                            
+
+                            <div class="form-group">
+                                
+                                <label for="inputDomain">Nama Domain</label>
+                                <input type="domain" class="form-control" name="domain" id="inputDomain" placeholder="" required="" autofocus="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputNama">Nama Organisasi</label>
+                                <input type="namaOrganisasi" class="form-control" id="inputNama" placeholder="" required="" autofocus="" name="namaOrganisasi">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputUnit">Unit Organisasi</label>
+                                <input type="unitOrganisasi" class="form-control" id="inputUnit" placeholder="" required="" autofocus="" name="unitOrganisasi">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputKota">Kota </label>
+                                <input type="kota" class="form-control" id="inputKota" placeholder="" required="" autofocus="" name="kota">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputProvinsi">Provinsi<span class="form-error" id="provinsierror"></span></label>
+                                <input type="prov" class="form-control" id="inputProv" placeholder="" required="" autofocus="" name="prov">
+                            </div>
+
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <button type="reset" class="btn btn-danger">Ulang<i></i></button>
+                                <button type="submit" class="btn btn-primary">Tambah</button>
+                              </div>
+                            </div>
+                        </form>
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
                     </div>
 
                 </div>
@@ -99,6 +148,40 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo asset_url(); ?>assets/js/bootstrap.min.js"></script>
 
+<<<<<<< HEAD
+=======
+    
+
+    <script>
+    function validateForm() {
+        var form = document.forms['form'];
+        var valid = true;
+        if (form['domain'].value == null || form['domain'].value == '') {
+            valid = false;
+            $('#domainerror').text('Anda belum mengisi Domain');
+        }
+        if (form['namaOrganisasi'].value == null || form['namaOrganisasi'].value == '') {
+            valid = false;
+            $('#namaorgerror').text('Anda belum mengisi Nama Organisasi');
+        }
+        if (form['unitOrganisasi'].value == null || form['unitOrganisasi'].value == '') {
+            valid = false;
+            $('#unitorgerror').text('Anda belum mengisi harga jual');
+        }
+        if (form['kota'].value == null || form['kota'].value == '') {
+            valid = false;
+            $('#kotaerror').text('Anda belum mengisi harga beli');
+        }
+        if (form['prov'].value == null || form['prov'].value == '') {
+            valid = false;
+            $('#provinsierror').text('Anda belum mengisi harga jual');
+        }
+
+        return valid;
+    }
+    </script>
+
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
 </body>
 
 </html>

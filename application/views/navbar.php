@@ -8,7 +8,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
+<<<<<<< HEAD
         <a class="navbar-brand" href="<?php echo base_url();?>user/login.html">HoaxCA</a>
+=======
+        <img src="<?php base_url();?>assets/icon/ikon.ico">
+        <!-- <a class="navbar-brand" href="<?php echo base_url();?>beranda/">HoaxCA</a> -->
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
@@ -23,11 +28,19 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
             <li <?php if ($aktif=="beranda") {?>class="active"<?php }?> >
+<<<<<<< HEAD
                 <a href="<?php echo base_url();?>user/login.html"><i class="fa fa-fw fa-dashboard"></i> Home</a>
             </li>
 
             <li <?php if ($aktif=="barang") {?>class="active"<?php }?> >
                 <a href="<?php echo base_url();?>user/buatCSR.html"><i class="fa fa-fw fa-wrench"></i> Buat CSR</a>
+=======
+                <a href="<?php echo base_url();?>beranda/"><i class="fa fa-fw fa-dashboard"></i> Home</a>
+            </li>
+
+            <li <?php if ($aktif=="barang") {?>class="active"<?php }?> >
+                <a href="<?php echo base_url();?>user/login.html"><i class="fa fa-fw fa-wrench"></i> Buat CSR</a>
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
             </li>
 
             <!--
@@ -63,7 +76,11 @@
             </li>-->
 
             <li <?php if ($aktif=="transaksi") {?>class="active"<?php }?>>
+<<<<<<< HEAD
                 <a href="<?php echo base_url();?>certificate_request/view"><i class="fa fa-fw fa-desktop"></i> Lihat CSR</a>
+=======
+                <a href="<?php echo base_url();?>certificate_request/view.html"><i class="fa fa-fw fa-desktop"></i> Lihat CSR</a>
+>>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
             </li>
 
         </ul>
