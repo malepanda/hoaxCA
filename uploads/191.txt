@@ -1,0 +1,14 @@
+TUGAS MVC INDIVIDU
+
+Upload file via FTP (bisa menggunakan FTP Client FileZilla).
+Akses DB di http://10.151.34.9/phpmyadmin/
+
+Username dan password untuk semua login
+username: pwebe
+pass : pwebe
+
+Ketentuan Upload.
+Buatlah folder kalian masing-masing sesuai nrp lalu upload file-file kalian ke dalam folder tersebut.
+Link laman hasil ada di alamat 10.151.34.9/[NRP MASING-MASING].
+
+- Asisten

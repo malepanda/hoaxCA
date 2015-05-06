@@ -33,6 +33,17 @@
 			return $res;
 		}
 
+		public function uploadCSR($data = array()){
+			$session_data = $this->session->userdata('logged_in');
+			$username = $session_data['username'];
+			$filepath = $data['filepath'];
+			$ID = $data['ID'];
+
+			$res = $this->db->query("CALL uploadCSR('$ID', '$username', '$filepath')");
+			
+			return $res;
+		}
+
 	}
 
 ?>

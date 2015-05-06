@@ -6,6 +6,7 @@ class Upload extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->helper(array('form', 'url'));
+		$this->load->model('cert_model');
 	}
 
 	function index()
@@ -17,10 +18,14 @@ class Upload extends CI_Controller {
 	{
 		$config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'txt';
+		$config['file_name'] = $this->input->post('ID');
 		// // $config['max_size']	= '100';
 		// $config['max_width']  = '1024';
 		// $config['max_height']  = '768';
-
+		// echo $this->input->post('ID');
+		$data['filepath'] = $config['upload_path'].$config['file_name'];
+		$data['ID'] = $config['file_name'];
+		$this->cert_model->uploadCSR($data);
 		$this->load->library('upload', $config);
 
 		if ( ! $this->upload->do_upload())
