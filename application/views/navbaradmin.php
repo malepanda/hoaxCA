@@ -23,11 +23,7 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
             <li <?php if ($aktif=="beranda") {?>class="active"<?php }?> >
-<<<<<<< HEAD
-                <a href="<?php echo base_url();?>admin/kehome"><i class="fa fa-fw fa-dashboard"></i> Home</a>
-=======
                 <a href="<?php echo base_url();?>beranda/"><i class="fa fa-fw fa-dashboard"></i> Home</a>
->>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
             </li>
 
             <li <?php if ($aktif=="barang") {?>class="active"<?php }?> >

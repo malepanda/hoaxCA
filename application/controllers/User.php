@@ -91,13 +91,6 @@ class User extends CI_Controller {
 		$this->load->view('register');
 	}
 
-<<<<<<< HEAD
-	public function buatCSR(){
-		$this->load->view('certificate_request');
-	}
-	
-=======
->>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
 	function logout()
 	{
 		$this->session->unset_userdata('logged_in');

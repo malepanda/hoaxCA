@@ -59,23 +59,15 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-<<<<<<< HEAD
-                            Selamat Datang
-=======
                             Buat CSR
->>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="#">Home</a>
                             </li>
-<<<<<<< HEAD
-                            
-=======
                             <li class="active">
                                 <i class="fa fa-edit"></i> Buat CSR
                             </li>
->>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
                         </ol>
                     </div>
                 </div>
@@ -85,12 +77,6 @@
                     <div class="col-lg-6 col-lg-offset-3">
 
 
-<<<<<<< HEAD
-                        <h2>Selamat Datang <?php 
-                        $session_data = $this->session->userdata('logged_in');
-                        $username = $session_data['username']; 
-                        echo "$username"; ?> :)</h2>
-=======
                         <form name="form" role="form" enctype= "multipart/form-data" method="post" action="certificate_request/request.html" onsubmit="return validateForm()">
                             
 
@@ -127,7 +113,6 @@
                               </div>
                             </div>
                         </form>
->>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
                     </div>
 
                 </div>
@@ -148,8 +133,6 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo asset_url(); ?>assets/js/bootstrap.min.js"></script>
 
-<<<<<<< HEAD
-=======
     
 
     <script>
@@ -181,7 +164,6 @@
     }
     </script>
 
->>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
 </body>
 
 </html>

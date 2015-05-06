@@ -70,11 +70,7 @@
                 <div class="row">
                    
                     		<div class="col-lg-12">
-<<<<<<< HEAD
-                    		<form method="POST" action="accCSR">
-=======
                     		<form method="POST" action="<?php echo base_url();?>certificate_sign/csr_sign">
->>>>>>> 1d9e011b2e6fa8e5f873f0650894a4d65b1610f2
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
