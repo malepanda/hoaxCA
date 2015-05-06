@@ -95,7 +95,7 @@ class certificate_request extends CI_Controller {
 			}
 		}
 		else
-			echo "NOT FOUND!";
+			$this->load->view('certificate_request_view', $data);
 	}
 
 }
