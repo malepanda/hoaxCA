@@ -7,6 +7,7 @@ class Certificate_sign extends CI_Controller {
 		{
 			parent::__construct();
 			$this->load->model('cert_model');
+            $this->load->helper('file');
 		}
 
 	public function index()
@@ -54,12 +55,30 @@ class Certificate_sign extends CI_Controller {
         // copy and paste it into their local configuration (such as a file
         // to hold the certificate for their SSL server)
         openssl_x509_export($usercert, $certout);
-        echo $certout;
-        
-        // openssl_x509_export_to_file ( $certout );
-        // Show any errors that occurred here
-        while (($e = openssl_error_string()) !== false) {
-            echo $e . "\n";
+        // echo $certout;
+        $filepath="./cert/".$ID.".crt";
+        if ( ! write_file($filepath, $certout))
+        {
+             echo 'Unable to write the file';
         }
-}
+        else
+        {
+            $data['ID']=$ID;
+            $data['certpath']=$filepath;
+            echo $filepath;
+            $res = $this->cert_model->signcert($data);
+
+            foreach ($res->result_array() as $row)
+                        {
+                        }
+
+            if ($row['statuscode']==0) {
+                redirect('admin/viewCSR');
+            }
+            else
+                echo $row['statusmsg'];
+
+        }
+
+    }
 }

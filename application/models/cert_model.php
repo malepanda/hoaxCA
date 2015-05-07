@@ -33,6 +33,18 @@
 			return $res;
 		}
 
+		public function viewCert(){
+			$session_data = $this->session->userdata('logged_in');
+			$username = $session_data['username'];
+			if ($username=="admin") {
+				$res = $this->db->query("CALL viewAllCert('$username')");
+			}
+			else
+				$res = $this->db->query("CALL viewMyCert('$username')");
+			
+			return $res;
+		}
+
 		public function uploadCSR($data = array()){
 			$session_data = $this->session->userdata('logged_in');
 			$username = $session_data['username'];
@@ -41,6 +53,26 @@
 
 			$res = $this->db->query("CALL uploadCSR('$ID', '$username', '$filepath')");
 			
+			return $res;
+		}
+
+		public function signCert($data = array()){
+			$session_data = $this->session->userdata('logged_in');
+			$username = $session_data['username'];
+			$filepath = $data['certpath'];
+			$ID = $data['ID'];
+			// echo $filepath;
+			$res = $this->db->query("CALL signCert('$ID', '$username', '$filepath')");
+			// echo $certpath;
+			
+			return $res;
+		}
+
+		public function download($data=array()){
+			$session_data = $this->session->userdata('logged_in');
+			$username = $session_data['username'];
+			$ID = $data['ID'];
+			$res = $this->db->query("CALL getCert('$ID', '$username')");
 			return $res;
 		}
 

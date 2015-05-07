@@ -43,7 +43,7 @@
     <div id="wrapper">
       <?php
         $data['aktif'] = "tambahBarang";
-        $this->load->view('navbaradmin', $data);
+        $this->load->view('navbar', $data);
       ?>
         <div id="page-wrapper">
 
@@ -70,7 +70,7 @@
                 <div class="row">
                    
                     		<div class="col-lg-12">
-                    		<form method="POST" action="<?php echo base_url();?>certificate_sign/csr_sign">
+                    		<form method="POST" action="<?php echo base_url();?>download">
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
@@ -82,46 +82,41 @@
                                         <th>Total</th> -->
 
                                         <th>ID</th>
-                                        <th>Nama Organisasi</th>
-                                        <th>Unit Organisasi</th>
-                                        <th>Kota</th>
-                                        <th>Provinsi</th>
-                                        <th>Setuju</th>
-                                        <th>Tidak Setuju</th>
+                                        <th>Domain</th>
+                                        <th>Download Certificate</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                 <?php
-							        foreach ($certreq as $row)
-							        {
-							          $ID = $row['ID'];
-							          $namaOrganisasi = $row['namaOrganisasi'];
-							          $unitOrganisasi = $row['unitOrganisasi'];
-							          $kota = $row['kota'];
-							          $prov = $row['prov'];
-                                      $available = $row['availableforsigning'];
+        foreach ($certreq as $row)
+        {
+          if ($row == 0) {
+            echo "<tr>";
+            echo "Data Tidak Ada";
+            echo "</tr>";
+          }
+          else{
+            $ID = $row['ID'];
+            $domain = $row['domain'];
+            // $uploadable = $row['availableforsigning'];
 
-                                      if ($available) {
-    							          echo "<tr>";
-    							          echo "<td>hoaxCA/req/$ID</td>";
-    							          echo "<td>$namaOrganisasi</td>";
-    							          echo "<td>$unitOrganisasi</td>";
-    							          echo "<td>$kota</td>";
-    							          echo "<td>$prov</td>";
-    							          echo "<td><button name='acc' type='submit' value='$ID'>Accept</button></td>";
-    							          echo "<td><button name='dec' type='submit' value='$ID'>Decline</button></td>";
+            echo "<tr>";
+            
+            echo "<td>hoaxCA/cert/$ID</td>";
+            echo "<td>$domain</td>";
+            echo "<td><button name='download' type='submit' value='$ID' type='button' class='btn btn-primary'>Accept</button></td>";
 
-    							          echo "</tr>";
-                                      }
-							        } 
-							      ?>
+            echo "</tr>";
+          }
+           
+        } 
+      ?>
 
                                   
                                 </tbody>
                             </table>
-                            </form>
                         </div>
 
                         

@@ -65,6 +65,9 @@
             <li <?php if ($aktif=="transaksi") {?>class="active"<?php }?>>
                 <a href="<?php echo base_url();?>admin/viewCSR"><i class="fa fa-fw fa-desktop"></i> Lihat CSR</a>
             </li>
+            <li <?php if ($aktif=="transaksi") {?>class="active"<?php }?>>
+                <a href="<?php echo base_url();?>certificate_request/viewCert.html"><i class="fa fa-fw fa-desktop"></i> Lihat Certificate</a>
+            </li>
 
         </ul>
     </div>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2015 at 08:32 PM
+-- Generation Time: May 07, 2015 at 03:06 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -24,8 +24,22 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `AcceptRequest`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getCert`(p_id int, p_username varchar (50))
 BEGIN
+	SET @same_user_name=(
+	SELECT COUNT(1) 
+	FROM certificate
+	WHERE username=p_username
+	GROUP BY username);
+	
+	IF (@same_user_name!=0 or p_username="admin") THEN
+		select 0 as statuscode, certFilePath from certificate where ID=p_id;
+		
+	ELSE 
+		SELECT -1 AS statuscode, CONCAT("Error: username ", p_username,"tidak ditemukan") AS statusmsg;
+	
+	END IF;
+	
     END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Login`(p_username VARCHAR (50), p_password VARCHAR (50))
@@ -75,7 +89,7 @@ BEGIN
 	
 	IF (@same_user_name!=0) THEN
 		insert into signingreq values (null, p_username, p_domain, p_namaOrganisasi, p_UnitOrganisasi, p_kota, p_prov, 
-					       p_script);
+					       p_script, false, null);
 		SELECT 0 AS statuscode, "Sukses" AS statusmsg;
 		
 	ELSE 
@@ -85,10 +99,89 @@ BEGIN
 	
     END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `signCert`(p_id INT, p_username VARCHAR (50), p_path VARCHAR (100))
+BEGIN
+	DECLARE exit handler for sqlexception
+	  BEGIN
+	    -- ERROR
+	  ROLLBACK;
+	END;
+	DECLARE exit handler for sqlwarning
+	 BEGIN
+	    -- WARNING
+	 ROLLBACK;
+	END;
+	
+	
+	
+	IF (p_username="admin") THEN
+		START TRANSACTION;
+		iNSERT INTO certificate VALUES (NULL, (select username from signingreq where ID=p_id), (SELECT domain FROM signingreq WHERE ID=p_id),
+						p_path);
+		delete from signingreq where ID=p_id;
+		COMMIT;
+		SELECT 0 AS statuscode, "Sukses" AS statusmsg; 
+		
+	ELSE 
+		SELECT -1 AS statuscode, CONCAT("HAHA... You're not admin... Aren't you? :/") AS statusmsg;
+	
+	END IF;
+	
+    END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `uploadCSR`(p_id int, p_username varchar (50), p_path varchar (100))
+BEGIN
+	SET @same_user_name=(
+	SELECT COUNT(1) 
+	FROM signingreq
+	WHERE username=p_username and ID=p_id
+	GROUP BY username);
+	
+	
+	IF (@same_user_name!=0) THEN
+		UPDATE signingreq SET csrpath=p_path, availableforsigning=true
+		WHERE ID = p_id;  
+		
+	ELSE 
+		SELECT -1 AS statuscode, CONCAT("Error: username ", p_username,"tidak ditemukan") AS statusmsg;
+	
+	END IF;
+    END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewAllCert`(p_username varchar (50))
+BEGIN
+	IF (p_username="admin") THEN
+		SELECT 0 AS statuscode, ID, domain, domain, certFilePath FROM certificate;
+		
+	ELSE 
+		SELECT -1 AS statuscode, CONCAT("Error: username ", p_username,"tidak ditemukan") AS statusmsg;
+	
+	END IF;
+    END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `viewAllRequest`(p_username varchar (50))
 BEGIN
 	IF (p_username="admin") THEN
-		SELECT 0 AS statuscode, ID, domain, namaOrganisasi, unitOrganisasi, kota, prov, script FROM signingreq;
+		SELECT 0 AS statuscode, ID, domain, namaOrganisasi, unitOrganisasi, kota, prov, script, availableforsigning FROM signingreq;
+		
+	ELSE 
+		SELECT -1 AS statuscode, CONCAT("Error: username ", p_username,"tidak ditemukan") AS statusmsg;
+	
+	END IF;
+    END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewMyCert`(p_username VARCHAR (50))
+BEGIN
+	SET @same_user_name=(
+	SELECT COUNT(1) 
+	FROM userTable
+	WHERE username=p_username
+	GROUP BY username);
+	
+	
+	IF (@same_user_name!=0) THEN
+		SELECT 0 AS statuscode, ID, domain,certFilePath FROM certificate
+		WHERE username=p_username;
 		
 	ELSE 
 		SELECT -1 AS statuscode, CONCAT("Error: username ", p_username,"tidak ditemukan") AS statusmsg;
@@ -107,7 +200,7 @@ BEGIN
 	
 	
 	IF (@same_user_name!=0) THEN
-		select 0 as statuscode, ID, domain, namaOrganisasi, unitOrganisasi, kota, prov, script from signingreq
+		select 0 as statuscode, ID, domain, namaOrganisasi, unitOrganisasi, kota, prov, script, availableforsigning from signingreq
 		where username=p_username;
 		
 	ELSE 
@@ -127,13 +220,18 @@ DELIMITER ;
 CREATE TABLE IF NOT EXISTS `certificate` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) DEFAULT NULL,
-  `berlakuSejak` date DEFAULT NULL,
-  `berlakuSampai` date DEFAULT NULL,
-  `filepath` varchar(50) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
+  `domain` varchar(50) DEFAULT NULL,
+  `certFilePath` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_certificate` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `certificate`
+--
+
+INSERT INTO `certificate` (`ID`, `username`, `domain`, `certFilePath`) VALUES
+(5, 'hmtc', 'hmtc.if..its.ac.id', './cert/23.crt');
 
 -- --------------------------------------------------------
 
@@ -150,16 +248,19 @@ CREATE TABLE IF NOT EXISTS `signingreq` (
   `kota` varchar(50) DEFAULT NULL,
   `prov` varchar(50) DEFAULT NULL,
   `script` varchar(200) DEFAULT NULL,
+  `availableforsigning` tinyint(1) DEFAULT NULL,
+  `csrpath` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_signingreq` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `signingreq`
 --
 
-INSERT INTO `signingreq` (`ID`, `username`, `domain`, `namaOrganisasi`, `unitOrganisasi`, `kota`, `prov`, `script`) VALUES
-(15, 'hmtc', 'hmtc.if..its.ac.id', 'HMTC', 'Departemen Medfo HMTC', 'Surabaya', 'Jawa Timur', 'openssl req -new -newkey rsa:2048 -nodes -out hmtc_if__its_ac_id.csr -keyout hmtc_if__its_ac_id.key -subj "/C=ID/ST=Jawa Timur/L=Surabaya/O=HMTC/OU=Departemen Medfo HMTC/CN=hmtc.if..its.ac.id');
+INSERT INTO `signingreq` (`ID`, `username`, `domain`, `namaOrganisasi`, `unitOrganisasi`, `kota`, `prov`, `script`, `availableforsigning`, `csrpath`) VALUES
+(16, 'testuser', 'test.dummy.com', 'dummy', 'dummy', 'dummy', 'dummy', 'openssl req -new -newkey rsa:2048 -nodes -out test_dummy_com.csr -keyout test_dummy_com.key -subj "/C=ID/ST=dummy/L=dummy/O=dummy/OU=dummy/CN=test.dummy.com', 0, NULL),
+(19, 'androISP', 'androisp.com', 'Android Internet Service Provider', 'Departemen Web', 'Surabaya', 'Jawa Timur', 'openssl req -new -newkey rsa:2048 -nodes -out androisp_com.csr -keyout androisp_com.key -subj "/C=ID/ST=Jawa Timur/L=Surabaya/O=Android Internet Service Provider/OU=Departemen Web/CN=androisp.com', 0, './uploads/19');
 
 -- --------------------------------------------------------
 

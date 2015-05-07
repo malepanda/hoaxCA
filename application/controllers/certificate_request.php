@@ -98,4 +98,25 @@ class certificate_request extends CI_Controller {
 			$this->load->view('certificate_request_view', $data);
 	}
 
+
+	public function viewCert(){
+		$res = $this->cert_model->viewCert();
+
+		foreach ($res->result_array() as $row)
+				{
+				}
+
+		$data['certreq']=$res->result_array();
+		if ($res->num_rows() > 0){
+			if ($row['statuscode']==0) {
+				$this->load->view('certificate_view', $data);
+			}
+			else{
+				echo $row['statusmsg'];
+			}
+		}
+		else
+			$this->load->view('certificate_request_view', $data);
+	}
+
 }
